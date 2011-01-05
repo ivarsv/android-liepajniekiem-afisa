@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Liepājas Afiša</string>
+<string name="refresh">Pārlādēt</string>
+<string name="refresh_loading">Lūdzu uzgaidiet</string>
+<string name="date">Šodienas datums</string>
+<string name="settings">Iestatījumi</string>
+<string name="error_nodes_empty">Informācija nav pieejama iespējams dēļ izmaiņām mājas lapā.</string>
+<string name="error_nodes_general">Neizdevās ielādēt</string>
+<string name="ok">Labi</string>
+<string name="category_site">liepajniekiem.lv</string>
+<string name="preference_site_url">Mājas lapa</string>
+<string name="preference_site_url_descr">Veids kā pievienoties afišai</string>
+</resources>

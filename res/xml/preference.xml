@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">	
+	<PreferenceCategory android:title="@string/category_site">
+	<EditTextPreference android:title="@string/preference_site_url" android:summary="@string/preference_site_url_descr" android:defaultValue="http://www.liepajniekiem.lv/lat/afisas-kalendars/" android:key="site_url">
+	</EditTextPreference>
+</PreferenceCategory>
+</PreferenceScreen>

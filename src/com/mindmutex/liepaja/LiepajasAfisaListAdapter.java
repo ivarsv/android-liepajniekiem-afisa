@@ -42,113 +42,114 @@ import android.widget.TextView;
  * in valid data source fed in {@link ExpandableListView}. Also includes custom UI.
  */
 public class LiepajasAfisaListAdapter extends BaseExpandableListAdapter {
-	/**
-	 * Available categories that are set when new data set of events
-	 * is provided. Separate because requires index not existing value in map (the string).
-	 */
-	private List<String> categories = new ArrayList<String>();
+    /**
+     * Available categories that are set when new data set of events
+     * is provided. Separate because requires index not existing value in map (the string).
+     */
+    private List<String> categories = new ArrayList<String>();
 
-	/**
-	 * Categories and events provided to adapter.
-	 */
-	private Map<String, List<Event>> events = new LinkedHashMap<String, List<Event>>();
+    /**
+     * Categories and events provided to adapter.
+     */
+    private Map<String, List<Event>> events = new LinkedHashMap<String, List<Event>>();
 
-	/**
-	 * Context required to obtain instance of {@link LayoutInflater}. In most cases context
-	 * is {@link LiepajasAfisa}.
-	 */
-	private Context context;
+    /**
+     * Context required to obtain instance of {@link LayoutInflater}. In most cases context
+     * is {@link LiepajasAfisa}.
+     */
+    private Context context;
 
-	/**
-	 * {@link LayoutInflater} to inflate XML layouts instead of building manually.
-	 */
-	private LayoutInflater inflater;
+    /**
+     * {@link LayoutInflater} to inflate XML layouts instead of building manually.
+     */
+    private LayoutInflater inflater;
 
-	public LiepajasAfisaListAdapter(Context context) {
-		this.inflater = (LayoutInflater)
-		context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		this.context = context;
-	}
+    public LiepajasAfisaListAdapter(Context context) {
+        this.inflater = (LayoutInflater)
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        
+        this.context = context;
+    }
 
-	public void setEvents(Map<String, List<Event>> events) {
-		this.categories =
-			new ArrayList<String>(events.keySet());
-		this.events = events;
-	}
+    public void setEvents(Map<String, List<Event>> events) {
+        this.categories =
+            new ArrayList<String>(events.keySet());
+        this.events = events;
+    }
 
-	@Override
-	public Object getChild(int groupPosition, int childPosition) {
-		return events.get(categories.get(groupPosition)).get(childPosition);
-	}
+    @Override
+    public Object getChild(int groupPosition, int childPosition) {
+        return events.get(categories.get(groupPosition)).get(childPosition);
+    }
 
-	@Override
-	public long getChildId(int groupPosition, int childPosition) {
-		return 0;
-	}
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return 0;
+    }
 
-	@Override
-	public View getChildView(int groupPosition,
-			int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    @Override
+    public View getChildView(int groupPosition,
+            int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-		View entry = inflater.inflate(R.layout.main, null);
+        View entry = inflater.inflate(R.layout.main, null);
 
-		Event event = (Event) getChild(groupPosition, childPosition);
-		String nameAndTime = event.location;
-		if (event.timestamp != null && event.timestamp.length() > 0) {
-			nameAndTime += String.format(" @ %s", event.timestamp);
-		}
+        Event event = (Event) getChild(groupPosition, childPosition);
+        String nameAndTime = event.location;
+        if (event.timestamp != null && event.timestamp.length() > 0) {
+            nameAndTime += String.format(" @ %s", event.timestamp);
+        }
 
-		((TextView) entry.findViewById(R.id.description)).setText(Html.fromHtml(event.description));
-		((TextView) entry.findViewById(R.id.name)).setText(Html.fromHtml(nameAndTime));
+        ((TextView) entry.findViewById(R.id.description)).setText(Html.fromHtml(event.description));
+        ((TextView) entry.findViewById(R.id.name)).setText(Html.fromHtml(nameAndTime));
 
-		return entry;
-	}
+        return entry;
+    }
 
-	@Override
-	public int getChildrenCount(int groupPosition) {
-		return events.get(categories.get(groupPosition)).size();
-	}
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return events.get(categories.get(groupPosition)).size();
+    }
 
-	@Override
-	public Object getGroup(int groupPosition) {
-		return categories.get(groupPosition);
-	}
+    @Override
+    public Object getGroup(int groupPosition) {
+        return categories.get(groupPosition);
+    }
 
-	@Override
-	public int getGroupCount() {
-		return categories.size();
-	}
+    @Override
+    public int getGroupCount() {
+        return categories.size();
+    }
 
-	@Override
-	public long getGroupId(int groupPosition) {
-		return 0;
-	}
+    @Override
+    public long getGroupId(int groupPosition) {
+        return 0;
+    }
 
-	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-		TextView textView = getGenericView();
-		textView.setText(getGroup(groupPosition).toString());
-		return textView;
-	}
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        TextView textView = getGenericView();
+        textView.setText(getGroup(groupPosition).toString());
+        return textView;
+    }
 
-	@Override
-	public boolean hasStableIds() {
-		return false;
-	}
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
 
-	@Override
-	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return false;
-	}
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return false;
+    }
 
-	private TextView getGenericView() {
-		AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
+    private TextView getGenericView() {
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
 
-		TextView textView = new TextView(context);
-		textView.setLayoutParams(params);
-		textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-		textView.setPadding(36, 0, 0, 0);
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(params);
+        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+        textView.setPadding(36, 0, 0, 0);
 
-		return textView;
-	}
+        return textView;
+    }
 }

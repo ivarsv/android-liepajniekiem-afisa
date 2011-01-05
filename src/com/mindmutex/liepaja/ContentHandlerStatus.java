@@ -21,38 +21,28 @@
  */
 package com.mindmutex.liepaja;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * POJO to store information about the event gathered from
- * liepajniekiem.lv web site.
- * <p>
- * Attempt to increase performance by not specifying getters and setters.
+ * Handler definition used by client to get notifications when
+ * request successfully completes or fails.
  */
-public class Event {
+public interface ContentHandlerStatus {
+    
     /**
-     * Name of the event such as name of the movie, name of
-     * the exhibition or similar.
+     * Method called when the request is successful.
+     *
+     * @param events list of events extracted from HTML where the key is category
+     *               and value a list of events attached to the category.
      */
-    public String location;
-
-    /**
-     * Additional description that is provided with the {@link #location}.
-     */
-    public String description;
+    void onComplete(Map<String, List<Event>> events);
 
     /**
-     * Time stamp as is on web site. Current format is time
-     * short 24hr format.
+     * Method called when fails to extract events from HTML provided or other.
+     *
+     * @param errorCode provides resource code ({@link R}) explaining the error
+     * @param message optional exception message
      */
-    public String timestamp;
-
-    public Event(String name, String description, String timestamp) {
-        this.location = name;
-        this.description = description;
-        this.timestamp = timestamp;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s %s @ %s", location, description, timestamp);
-    }
+    void onError(int errorCode, String message);
 }

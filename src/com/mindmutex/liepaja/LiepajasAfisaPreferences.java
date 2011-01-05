@@ -28,9 +28,9 @@ import android.preference.PreferenceActivity;
  * Application preference screen.
  */
 public class LiepajasAfisaPreferences extends PreferenceActivity {
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preference);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preference);
+    }
 }
